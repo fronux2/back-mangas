@@ -1,0 +1,8 @@
+POST http://localhost:3000/mangas
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6Im1hcmNvcyIsIm5vbWJyZVVzdWFyaW8iOiJmcm9udXgiLCJtYW5nYXMiOltdLCJjYXBpdHVsb3MiOltdLCJpZCI6IjY2M2U1NWJiMjk0YjRhNjgwNzUzNGRiOCJ9LCJpYXQiOjE3MTUzNzAwNjUsImV4cCI6MTcxNTM3MzY2NX0.0k-gmcx9BZXF1ramp-9IyM9FGX_aMilDi8vZNd8a2eQ
+
+{    
+    "titulo": "Naruto2",
+    "estado": "Siguiendo"
+}

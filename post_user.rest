@@ -1,0 +1,8 @@
+POST http://localhost:3000/usuario
+content-type: application/json
+
+{
+    "nombre": "marcos",
+    "nombreUsuario": "fronux",
+    "contrasena": "123456"
+}
