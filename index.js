@@ -6,6 +6,7 @@ app.use(express.json())
 const usuarioRouter = require('./usuarioRouter')
 const loginRouter = require('./loginRouter')
 const mangasRouter = require('./mangasRouter')
+const capitulosRouter = require('./capitulosRouter')
 
 require('./mongodb')
 const PORT = 3000
@@ -23,3 +24,4 @@ app.get('/login', (req, res) => {
 app.use('/login', loginRouter)
 app.use('/usuario', usuarioRouter)
 app.use('/mangas', mangasRouter)
+app.use('/capitulos', capitulosRouter)

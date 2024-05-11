@@ -2,8 +2,18 @@ const usuarioRouter = require('express').Router()
 const Usuario = require('./usuariosModel')
 const bcrypt = require('bcrypt')
 
-usuarioRouter.get('/', (req, res) => {
-  res.status(200).send('Hola mundo')
+usuarioRouter.get('/', async (req, res) => {
+  const usuarios = await Usuario.find({}).populate('mangas', {
+    titulo: 1,
+    estado: 1,
+    id: 1
+  }).populate('capitulos', {
+    numero: 1,
+    imagenes: 1,
+    siguiendo: 1,
+    id: 1
+  })
+  res.status(200).json(usuarios)
 })
 
 usuarioRouter.post('/', async (req, res) => {

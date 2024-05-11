@@ -3,10 +3,10 @@ const { Schema, model } = mongoose
 
 const usuarioSchema = new Schema({
   nombre: { type: String, require: true },
-  nombreUsuario: { type: String, require: true },
+  nombreUsuario: { type: String, require: true, unique: true },
   contrasena: { type: String, require: true },
   login: { type: Schema.Types.ObjectId, ref: 'Login' },
-  mangas: [{ type: Schema.Types.ObjectId, ref: 'Manga' }],
+  mangas: [{ type: Schema.Types.ObjectId, ref: 'Mangas' }],
   capitulos: [{ type: Schema.Types.ObjectId, ref: 'Capitulos' }]
 
 })

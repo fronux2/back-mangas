@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const { Schema, model } = mongoose
 
 const mangasSchema = new Schema({
-  titulo: { type: String, required: true },
+  titulo: { type: String, required: true, unique: true },
   estado: { type: String, enum: ['Leido', 'Pendiente', 'Siguiendo', 'Favorito', 'Lo tengo', 'Abandonado'] },
   capitulos: { type: Schema.Types.ObjectId, ref: 'Capitulos' },
   usuario: { type: Schema.Types.ObjectId, ref: 'Usuario' }

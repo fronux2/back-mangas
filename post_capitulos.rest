@@ -1,0 +1,9 @@
+POST http://localhost:3000/capitulos
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6Im1hcmNvcyIsIm5vbWJyZVVzdWFyaW8iOiJmcm9udXgiLCJtYW5nYXMiOlsiNjYzZTk3YmViY2ZmMGVhYWJkMmMwOWY3IiwiNjYzZWE3ODQ5OWM3OTY1NjBmZDc1NmQwIiwiNjYzZWE3YWU5OWM3OTY1NjBmZDc1NmQ3IiwiNjYzZWE3Yzc5OWM3OTY1NjBmZDc1NmRlIl0sImNhcGl0dWxvcyI6W10sImlkIjoiNjYzZTk3NDdiY2ZmMGVhYWJkMmMwOWYxIn0sImlhdCI6MTcxNTM4NjU4NSwiZXhwIjoxNzE1MzkwMTg1fQ.tuLFKM9TEvtQnJmbiuu2q75VODd1EeeOHxMtVulnPic
+
+{    
+    "numero": 17,
+    "imagenes": ["dd","ff","ññ"],
+    "siguiendo": true
+}
