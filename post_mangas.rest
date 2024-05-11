@@ -1,9 +1,9 @@
 POST http://localhost:3000/mangas
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6Im1hcmNvcyIsIm5vbWJyZVVzdWFyaW8iOiJmcm9udXgiLCJtYW5nYXMiOlsiNjYzZTk3YmViY2ZmMGVhYWJkMmMwOWY3Il0sImNhcGl0dWxvcyI6W10sImlkIjoiNjYzZTk3NDdiY2ZmMGVhYWJkMmMwOWYxIn0sImlhdCI6MTcxNTM4MjEyMiwiZXhwIjoxNzE1Mzg1NzIyfQ.f8uffBsisau59JxgaEFWLKDKFMoO_zu3L-xl-IPhrck
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6Im1hcmNvcyIsIm5vbWJyZVVzdWFyaW8iOiJmcm9udXgiLCJtYW5nYXMiOltdLCJpZCI6IjY2M2Y5MjVhMmZlYzdkNGQ0ZmYzOTc2MCJ9LCJpYXQiOjE3MTU0NDIyNzEsImV4cCI6MTcxNTQ0NTg3MX0.qE4rG9ksBdjUnIwJfZNJ2ClhUNPQ883NJu3zJxNgPa8
+
 
 {    
-    "titulo": "Naruto3",
-    "estado": "Siguiendo",
-    "usuario": "663e9758bcff0eaabd2c09f3"
+    "titulo": "Naruto",
+    "estado": "Siguiendo"
 }

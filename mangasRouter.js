@@ -28,6 +28,7 @@ mangasRouter.post('/', async (req, res) => {
     const mangaGuardado = await nuevoManga.save()
     user.mangas = user.mangas.concat(mangaGuardado._id)
     await user.save()
+
     res.status(200).json(mangaGuardado)
   } catch (error) {
     res.status(400).json({ estado: 'estado incorrecto' })

@@ -6,9 +6,7 @@ const usuarioSchema = new Schema({
   nombreUsuario: { type: String, require: true, unique: true },
   contrasena: { type: String, require: true },
   login: { type: Schema.Types.ObjectId, ref: 'Login' },
-  mangas: [{ type: Schema.Types.ObjectId, ref: 'Mangas' }],
-  capitulos: [{ type: Schema.Types.ObjectId, ref: 'Capitulos' }]
-
+  mangas: [{ type: Schema.Types.ObjectId, ref: 'Mangas' }]
 })
 
 usuarioSchema.set('toJSON', {
