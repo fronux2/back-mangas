@@ -1,10 +1,10 @@
 POST http://localhost:3000/capitulos
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6Im1hcmNvcyIsIm5vbWJyZVVzdWFyaW8iOiJmcm9udXgiLCJtYW5nYXMiOltdLCJpZCI6IjY2M2Y5MjVhMmZlYzdkNGQ0ZmYzOTc2MCJ9LCJpYXQiOjE3MTU0NDIyNzEsImV4cCI6MTcxNTQ0NTg3MX0.qE4rG9ksBdjUnIwJfZNJ2ClhUNPQ883NJu3zJxNgPa8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Im5vbWJyZSI6Im1hcmNvcyIsIm5vbWJyZVVzdWFyaW8iOiJmcm9udXgiLCJtYW5nYXMiOlsiNjYzZjkyNzgyZmVjN2Q0ZDRmZjM5NzY0IiwiNjY0MjdiZjUwYjU1ZGJiZWQwNGQ5ZjFlIiwiNjY0MjdjZDgwYjU1ZGJiZWQwNGQ5ZjIyIiwiNjY0MjdjZTIwYjU1ZGJiZWQwNGQ5ZjI2IiwiNjY0MjdjZTgwYjU1ZGJiZWQwNGQ5ZjJhIl0sImlkIjoiNjYzZjkyNWEyZmVjN2Q0ZDRmZjM5NzYwIn0sImlhdCI6MTcxNTY1OTAyMCwiZXhwIjoxNzE1NjYyNjIwfQ.cncleubI1lje2pQ_UPY7wxBzjpqGv3dZJPiCq1tCMZk
 
 {    
-    "numero": 17,
-    "imagenes": ["dd","ff","ññ","lala","lelele"],
+    "numero": 21,
+    "imagenes": ["dd","ff","ññ","lala","lelele","jejeje"],
     "siguiendo": true,
-    "mangas": "663f92782fec7d4d4ff39764"
+    "mangas": "66427ce80b55dbbed04d9f2a"
 }

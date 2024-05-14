@@ -2,6 +2,6 @@ POST http://localhost:3000/login
 content-type: application/json
 
 {    
-    "nombreUsuario": "fronux",
+    "nombreUsuario": "fronux2",
     "contrasena": "123456"
 }

@@ -7,6 +7,7 @@ const usuarioRouter = require('./usuarioRouter')
 const loginRouter = require('./loginRouter')
 const mangasRouter = require('./mangasRouter')
 const capitulosRouter = require('./capitulosRouter')
+const errorHandler = require('./errorHandler')
 
 require('./mongodb')
 const PORT = 3000
@@ -25,3 +26,4 @@ app.use('/login', loginRouter)
 app.use('/usuario', usuarioRouter)
 app.use('/mangas', mangasRouter)
 app.use('/capitulos', capitulosRouter)
+app.use(errorHandler)
