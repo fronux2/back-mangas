@@ -8,9 +8,12 @@ const loginRouter = require('./loginRouter')
 const mangasRouter = require('./mangasRouter')
 const capitulosRouter = require('./capitulosRouter')
 const errorHandler = require('./errorHandler')
+const generoRouter = require('./generoRouter')
+const tipoRouter = require('./tipoRouter')
+const estadoRouter = require('./estadoRouter')
 
 require('./mongodb')
-const PORT = 3000
+const PORT = 4000
 
 app.get('/', (req, res) => res.status(200).send('Hola mundo como estas'))
 
@@ -26,4 +29,7 @@ app.use('/login', loginRouter)
 app.use('/usuario', usuarioRouter)
 app.use('/mangas', mangasRouter)
 app.use('/capitulos', capitulosRouter)
+app.use('/generos', generoRouter)
+app.use('/tipos', tipoRouter)
+app.use('/estados', estadoRouter)
 app.use(errorHandler)

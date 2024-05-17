@@ -1,0 +1,6 @@
+POST http://localhost:3000/generos
+content-type: application/json
+
+{    
+    "nombre": "Accion"    
+}

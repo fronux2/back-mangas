@@ -3,6 +3,6 @@ content-type: application/json
 
 {
     "nombre": "marcos",
-    "nombreUsuario": "fronux",
+    "nombreUsuario": "fronux5",
     "contrasena": "123456"
 }

@@ -5,8 +5,10 @@ const usuarioSchema = new Schema({
   nombre: { type: String, require: true },
   nombreUsuario: { type: String, require: true, unique: true },
   contrasena: { type: String, require: true },
+  timestamp: { type: Date },
   login: { type: Schema.Types.ObjectId, ref: 'Login' },
-  mangas: [{ type: Schema.Types.ObjectId, ref: 'Mangas' }]
+  mangas: [{ type: Schema.Types.ObjectId, ref: 'Mangas' }],
+  nivel: { type: String, enum: ['bajo', 'miedio', 'alto'], default: 'bajo' }
 })
 
 usuarioSchema.set('toJSON', {
