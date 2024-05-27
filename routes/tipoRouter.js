@@ -1,8 +1,9 @@
 const tipoRouter = require('express').Router()
-const Tipo = require('./tipoModel')
+const Tipo = require('../models/tipoModel')
 
-tipoRouter.get('/', (req, res, next) => {
-  res.send('Hola mundo Tipo')
+tipoRouter.get('/', async (req, res, next) => {
+  const tipo = await Tipo.find({})
+  res.status(200).json(tipo)
 })
 
 tipoRouter.post('/', async (req, res, next) => {

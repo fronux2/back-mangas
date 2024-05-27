@@ -1,0 +1,6 @@
+PUT http://localhost:4000/mangas/664ebdde7c12b62fd02f85e9
+content-type: application/json
+
+{
+    "nombre": "Siguiendo"    
+}

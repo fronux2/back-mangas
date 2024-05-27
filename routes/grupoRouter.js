@@ -1,7 +1,7 @@
 const capitulosRouter = require('express').Router()
-const Capitulos = require('./capitulosModel')
-const Mangas = require('./mangasModel')
-const middlewareLogin = require('./middlewareLogin')
+const Capitulos = require('../capitulosModel')
+const Mangas = require('../models/mangasModel')
+const middlewareLogin = require('../middlewareLogin')
 capitulosRouter.get('/', async (req, res) => {
   const capitulos = await Capitulos.find({}).populate('mangas')
   res.json(capitulos)

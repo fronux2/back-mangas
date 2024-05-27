@@ -1,5 +1,5 @@
 const estadoRouter = require('express').Router()
-const Estado = require('./tipoModel')
+const Estado = require('../tipoModel')
 
 estadoRouter.get('/', (req, res, next) => {
   res.send('Hola mundo Estado')

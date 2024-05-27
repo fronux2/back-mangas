@@ -1,22 +1,29 @@
 const capitulosRouter = require('express').Router()
-const Capitulos = require('./capitulosModel')
-const Mangas = require('./mangasModel')
-const middlewareLogin = require('./middlewareLogin')
+const Capitulos = require('../capitulosModel')
+const Mangas = require('../mangasModel')
+// const middlewareLogin = require('./middlewareLogin')
 capitulosRouter.get('/', async (req, res) => {
   const capitulos = await Capitulos.find({}).populate('mangas')
   res.json(capitulos)
 })
 
-capitulosRouter.post('/', middlewareLogin, async (req, res, next) => {
+capitulosRouter.get('/:id', async (req, res) => {
+  const { id } = req.params
+  const capitulo = await Capitulos.findById(id)
+  res.json(capitulo)
+})
+
+capitulosRouter.post('/', async (req, res, next) => {
   try {
     const { body } = req
-    const { numero, imagenes, siguiendo, mangas } = body
+    const { imagenes, mangas, numero, titulo, nCapitulo } = body
 
     const nuevoCapitulo = new Capitulos({
-      numero,
+      titulo,
       imagenes,
-      siguiendo,
-      mangas
+      mangas,
+      numero,
+      nCapitulo
     })
     const savedCapitulo = await nuevoCapitulo.save()
     const manga = await Mangas.findById(mangas)

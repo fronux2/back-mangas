@@ -1,8 +1,9 @@
 const usuarioRouter = require('express').Router()
-const Usuario = require('./usuariosModel')
+const Usuario = require('../models/usuariosModel')
 const bcrypt = require('bcrypt')
+const authenticateToken = require('./middlewareLogin')
 
-usuarioRouter.get('/', async (req, res) => {
+usuarioRouter.get('/', authenticateToken, async (req, res, next) => {
   const usuarios = await Usuario.find({}).populate('mangas', {
     titulo: 1,
     estado: 1,

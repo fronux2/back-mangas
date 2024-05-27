@@ -1,18 +1,29 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
+const cors = require('cors')
+const cookieParser = require('cookie-parser')
+
 app.use(express.json())
+app.use(cookieParser())
+const corsOptions = {
+  origin: ['http://localhost:3000', 'http://localhost:4000'], // Reemplaza con el dominio de tu front-end
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true, // Permitir cookies
+  allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Headers']
+}
+app.use(cors(corsOptions))
 
-const usuarioRouter = require('./usuarioRouter')
-const loginRouter = require('./loginRouter')
-const mangasRouter = require('./mangasRouter')
-const capitulosRouter = require('./capitulosRouter')
-const errorHandler = require('./errorHandler')
-const generoRouter = require('./generoRouter')
-const tipoRouter = require('./tipoRouter')
-const estadoRouter = require('./estadoRouter')
-
-require('./mongodb')
+const usuarioRouter = require('./routes/usuarioRouter')
+const loginRouter = require('./routes/loginRouter')
+const mangasRouter = require('./routes/mangasRouter')
+const capitulosRouter = require('./routes/capitulosRouter')
+const errorHandler = require('./routes/errorHandler')
+const generoRouter = require('./routes/generoRouter')
+const tipoRouter = require('./routes/routes/tipoRouter')
+const estadoRouter = require('./routes/estadoRouter')
+const demografiaRouter = require('./routes/demografiaRouter')
+require('./config/mongodb')
 const PORT = 4000
 
 app.get('/', (req, res) => res.status(200).send('Hola mundo como estas'))
@@ -32,4 +43,5 @@ app.use('/capitulos', capitulosRouter)
 app.use('/generos', generoRouter)
 app.use('/tipos', tipoRouter)
 app.use('/estados', estadoRouter)
+app.use('/demografias', demografiaRouter)
 app.use(errorHandler)

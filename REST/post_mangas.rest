@@ -1,0 +1,10 @@
+POST http://localhost:4000/mangas
+content-type: application/json
+
+{    
+    "titulo": "Evangelion",
+    "tipo": "664c239c940fc58c453b3e34",
+    "genero": ["664bfa65c0a50762f389aa5a", "6646683d956de8d52ff9e2a3"],
+    "demografia": "664c221dfc77aa297bfd81ec",
+    "portada": "https://i.pinimg.com/originals/ef/ae/d6/efaed6a0d8ee0bd0e0a3e8a8d9e9d7.jpg"
+}
