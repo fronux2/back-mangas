@@ -4,7 +4,7 @@ const { Schema, model } = mongoose
 const capitulosSchema = new Schema({
   titulo: { type: String },
   numero: { type: Number },
-  nCapitulo: { type: Number, required: true, unique: true },
+  nCapitulo: { type: Number, required: true },
   imagenes: [{ type: String }], // Rutas de las imágenes de las páginas del capítulo
   siguiendo: { type: Boolean, default: false },
   mangas: { type: Schema.Types.ObjectId, ref: 'Mangas' }

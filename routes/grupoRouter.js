@@ -1,13 +1,13 @@
 const capitulosRouter = require('express').Router()
-const Capitulos = require('../capitulosModel')
+const Capitulos = require('../models/capitulosModel')
 const Mangas = require('../models/mangasModel')
-const middlewareLogin = require('../middlewareLogin')
+// const middlewareLogin = require('../middleware/middlewareLogin')
 capitulosRouter.get('/', async (req, res) => {
   const capitulos = await Capitulos.find({}).populate('mangas')
   res.json(capitulos)
 })
 
-capitulosRouter.post('/', middlewareLogin, async (req, res, next) => {
+capitulosRouter.post('/', async (req, res, next) => {
   try {
     const { body } = req
     const { numero, imagenes, siguiendo, mangas } = body

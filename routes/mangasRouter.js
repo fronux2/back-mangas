@@ -1,9 +1,9 @@
 const mangasRouter = require('express').Router()
 const Mangas = require('../models/mangasModel')
 // const middlewareLogin = require('./middlewareLogin')
-const Usuario = require('../usuariosModel')
+const Usuario = require('../models/usuariosModel')
 const Genero = require('../models/generoModel')
-const Tipo = require('../tipoModel')
+const Tipo = require('../models/tipoModel')
 
 mangasRouter.get('/', async (req, res) => {
   const mangas = await Mangas.find({}).populate('usuario').populate('capitulos').populate('genero').populate('tipo').populate('demografia')

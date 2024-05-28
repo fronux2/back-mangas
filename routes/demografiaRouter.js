@@ -1,5 +1,5 @@
 const demografiaRouter = require('express').Router()
-const Demografia = require('../demografiaModel')
+const Demografia = require('../models/demografiaModel')
 
 demografiaRouter.get('/', async (req, res, next) => {
   const demografias = await Demografia.find({})
