@@ -1,8 +1,7 @@
 const usuarioRouter = require('express').Router()
 const Usuario = require('../models/usuariosModel')
 const bcrypt = require('bcrypt')
-// const authenticateToken = require('./middlewareLogin')
-
+const authenticateToken = require('../middleware/middlewareLogin')
 usuarioRouter.get('/', async (req, res, next) => {
   const usuarios = await Usuario.find({}).populate('mangas', {
     titulo: 1,
@@ -29,6 +28,23 @@ usuarioRouter.post('/', async (req, res, next) => {
   } catch (error) {
     next(error)
   }
+})
+
+usuarioRouter.get('/manga/:mangaId', authenticateToken, async (req, res) => {
+  const { user } = req
+  const { mangaId } = req.params
+  const usuario = await Usuario.findById(user.usuario.id)
+  const mangaEncontrado = usuario.seguimientoManga.find(man => man.manga.toString() === mangaId)
+  res.status(200).json(mangaEncontrado)
+})
+
+usuarioRouter.get('/:id', async (req, res, next) => {
+  const { id } = req.params
+  const usuario = await Usuario.findById(id)
+  if (!usuario) {
+    return res.status(404).json({ message: 'Usuario no encontrado' })
+  }
+  res.status(200).json(usuario)
 })
 
 module.exports = usuarioRouter

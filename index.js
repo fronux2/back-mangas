@@ -26,6 +26,7 @@ const demografiaRouter = require('./routes/demografiaRouter')
 const registroRouter = require('./routes/registroRouter')
 const seguimientoRouter = require('./routes/seguimientoRouter')
 require('./config/mongodb')
+
 const PORT = 4000
 
 app.get('/', (req, res) => res.status(200).send('Hola mundo como estas'))
@@ -35,10 +36,6 @@ app.listen(PORT, () => {
 })
 
 app.get('/login', (req, res) => {
-  res.status(200).json({ user: 'marcos' })
-})
-
-app.get('/usuario', (req, res) => {
   res.status(200).json({ user: 'marcos' })
 })
 

@@ -10,7 +10,6 @@ segCapRouter.post('/:idCap', authenticateToken, async (req, res) => {
 
   try {
     const user = await Usuario.findById(userId)
-    console.log(user)
   } catch (error) {
 
   }

@@ -8,7 +8,6 @@ loginRouter.get('/', (req, res) => {
 })
 
 loginRouter.post('/', async (req, res, next) => {
-  console.log(req.body)
   const { nombreUsuario, contrasena } = req.body
   try {
     const usuario = await Usuario.findOne({ nombreUsuario })
