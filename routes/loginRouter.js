@@ -15,7 +15,6 @@ loginRouter.post('/', async (req, res, next) => {
     const validadorContrasena = await bcrypt.compare(contrasena, usuario.contrasena)
     if (usuario && validadorContrasena) {
       const token = await jwt.sign({ usuario }, process.env.SECRET, { expiresIn: '1h' })
-      console.log('token: ', token)
       res.cookie('token', token, { httpOnly: true, secure: false, path: '/' })
       res.status(200).json({ menubar: 'Login correcto' })
     } else {

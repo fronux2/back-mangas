@@ -1,6 +1,6 @@
 const mangasRouter = require('express').Router()
 const Mangas = require('../models/mangasModel')
-// const middlewareLogin = require('./middlewareLogin')
+const authenticateToken = require('../middleware/middlewareLogin')
 const Usuario = require('../models/usuariosModel')
 const Genero = require('../models/generoModel')
 const Tipo = require('../models/tipoModel')
@@ -11,12 +11,12 @@ mangasRouter.get('/', async (req, res) => {
   res.status(200).json(mangas)
 })
 
-mangasRouter.post('/', async (req, res, next) => {
+mangasRouter.post('/', authenticateToken, async (req, res, next) => {
+  const { body, user } = req
+  const userId = user.usuario.id
+  const { titulo, portada, genero, tipo, demografia, descripcion } = body
   try {
-    const { userId, body } = req
-
-    const { titulo, portada, genero, tipo, seguimiento, demografia, descripcion } = body
-    const user = await Usuario.findById(userId)
+    const userEncontrado = await Usuario.findById(userId)
     const nuevoManga = new Mangas({
       titulo,
       descripcion,
@@ -24,23 +24,22 @@ mangasRouter.post('/', async (req, res, next) => {
       usuario: userId,
       genero,
       tipo,
-      seguimiento,
       demografia,
       timestamp: Date.now()
     })
     const mangaGuardado = await nuevoManga.save()
     res.status(200).json(mangaGuardado)
-    user.mangas = user.mangas.concat(mangaGuardado._id)
+    userEncontrado.mangas = userEncontrado.mangas.concat(mangaGuardado._id)
     const busquedaGenero = await Genero.findById(genero)
     const busquedaTipo = await Tipo.findById(tipo)
     busquedaGenero.manga = await busquedaGenero.manga.concat(mangaGuardado._id)
     busquedaTipo.manga = await busquedaTipo.manga.concat(mangaGuardado._id)
 
-    await user.save()
+    await userEncontrado.save()
     await busquedaGenero.save()
     await busquedaTipo.save()
   } catch (error) {
-    next(error)
+    console.error(error)
   }
 })
 

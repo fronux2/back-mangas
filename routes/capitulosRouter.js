@@ -17,7 +17,6 @@ capitulosRouter.post('/', async (req, res, next) => {
   try {
     const { body } = req
     const { imagenes, mangas, numero, titulo, nCapitulo } = body
-
     const nuevoCapitulo = new Capitulos({
       titulo,
       imagenes,
@@ -25,12 +24,10 @@ capitulosRouter.post('/', async (req, res, next) => {
       numero,
       nCapitulo
     })
-    console.log(nuevoCapitulo)
     const savedCapitulo = await nuevoCapitulo.save()
     const manga = await Mangas.findById(mangas)
     manga.capitulos = manga.capitulos.concat(savedCapitulo._id)
     await manga.save()
-
     res.json(savedCapitulo)
   } catch (error) {
     console.error(error)
