@@ -7,3 +7,4 @@
 7. Comandos para usar en terminal para usar node
     1. Bash: eval "$(fnm env --use-on-cd)"
     2. PowerShell: fnm env --use-on-cd | Out-String | Invoke-Expression
+8. Agregar el seguimiento a capitulos.

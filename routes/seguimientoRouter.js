@@ -33,7 +33,7 @@ seguimientoRouter.post('/manga/:idManga', authenticateToken, async (req, res) =>
 seguimientoRouter.post('/capitulo/:idCap', authenticateToken, async (req, res) => {
   const { user, params, body } = req
   const { idCap } = params
-  const { idManga } = body
+  const { idManga, nCapitulo } = body
   try {
     const userEcontrado = await Usuario.findById(user.usuario.id)
     const userCapitulo = userEcontrado.seguimientoManga.find(s => s.manga.toString() === idManga.toString())
@@ -41,13 +41,55 @@ seguimientoRouter.post('/capitulo/:idCap', authenticateToken, async (req, res) =
     if (capitExist) {
       return res.status(200).json({ capituloVisto: 'Ya sigues este capitulo' })
     }
-    const nuevoCapitulo = { capitulo: idCap, manga: idManga }
+    const nuevoCapitulo = { capitulo: idCap, manga: idManga, nCapitulo }
     userCapitulo.capitulosVistos.push(nuevoCapitulo)
     await userEcontrado.save()
     res.status(200).json({ seguimiento: userEcontrado.seguimientoManga })
   } catch (error) {
 
   }
+})
+
+seguimientoRouter.get('/capitulo/:mangaId', authenticateToken, async (req, res) => {
+  const { user, params } = req
+  const { mangaId } = params
+  const usuario = await Usuario.findById(user.usuario.id)
+  const manga = usuario.seguimientoManga.find(s => s.manga.toString() === mangaId)
+  const capitulosVistos = manga.capitulosVistos.filter(c => c.manga.toString() === mangaId)
+  const maxNCap = Math.max(...capitulosVistos.map(obj => obj.nCapitulo))
+  res.json(maxNCap)
+})
+
+seguimientoRouter.post('/manga/maxVisto/:mangaId', authenticateToken, async (req, res) => {
+  const { user, params } = req
+  const { mangaId } = params
+  const usuario = await Usuario.findById(user.usuario.id)
+  const encontrado = usuario.maxVisto.find(m => m.manga.toString() === mangaId)
+  if (encontrado) {
+    return res.json({ error: 'Ya has visto este manga' })
+  }
+  usuario.maxVisto = usuario.maxVisto.concat({ manga: mangaId })
+  await usuario.save()
+  res.json(usuario.maxVisto)
+})
+seguimientoRouter.put('/manga/maxVisto/:mangaId', authenticateToken, async (req, res) => {
+  const { user, params, body } = req
+  const { maxVisto } = body
+  const { mangaId } = params
+  const usuarioModificado = await Usuario.findOneAndUpdate(
+    { _id: user.usuario.id, 'maxVisto.manga': mangaId },
+    { $set: { 'maxVisto.$.maxVisto': maxVisto } },
+    { new: true, upsert: true }
+  )
+  res.json(usuarioModificado)
+})
+
+seguimientoRouter.get('/manga/maxVisto/:mangaId', authenticateToken, async (req, res) => {
+  const { user, params } = req
+  const { mangaId } = params
+  const usuario = await Usuario.findById(user.usuario.id)
+  const encontrado = usuario.maxVisto.find(m => m.manga.toString() === mangaId)
+  res.json(encontrado.maxVisto)
 })
 
 module.exports = seguimientoRouter

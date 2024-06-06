@@ -4,7 +4,8 @@ const { Schema, model } = mongoose
 const seguimientoCapSchema = new Schema({
   manga: { type: Schema.Types.ObjectId, ref: 'Mangas' },
   capitulo: { type: Schema.Types.ObjectId, ref: 'Capitulos' },
-  seguimiento: { type: String, required: true, default: 'No seguido', enum: ['Seguido', 'No seguido'] },
+  seguimiento: { type: String, required: true, default: 'Seguido', enum: ['Seguido', 'No seguido'] },
+  nCapitulo: { type: Number },
   timestamp: { type: Date }
 })
 
@@ -15,6 +16,11 @@ const seguimientoMangaSchema = new Schema({
   timestamp: { type: Date }
 })
 
+const maxVistoSchema = new Schema({
+  manga: { type: Schema.Types.ObjectId, ref: 'Mangas' },
+  maxVisto: { type: Number, default: 0 }
+})
+
 const usuarioSchema = new Schema({
   nombre: { type: String, require: true },
   nombreUsuario: { type: String, require: true, unique: true },
@@ -23,7 +29,8 @@ const usuarioSchema = new Schema({
   login: { type: Schema.Types.ObjectId, ref: 'Login' },
   mangas: [{ type: Schema.Types.ObjectId, ref: 'Mangas' }],
   nivel: { type: String, enum: ['bajo', 'medio', 'alto'], default: 'bajo' },
-  seguimientoManga: [seguimientoMangaSchema]
+  seguimientoManga: [seguimientoMangaSchema],
+  maxVisto: [maxVistoSchema]
 })
 
 usuarioSchema.set('toJSON', {
