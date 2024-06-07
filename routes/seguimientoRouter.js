@@ -53,24 +53,32 @@ seguimientoRouter.post('/capitulo/:idCap', authenticateToken, async (req, res) =
 seguimientoRouter.get('/capitulo/:mangaId', authenticateToken, async (req, res) => {
   const { user, params } = req
   const { mangaId } = params
-  const usuario = await Usuario.findById(user.usuario.id)
-  const manga = usuario.seguimientoManga.find(s => s.manga.toString() === mangaId)
-  const capitulosVistos = manga.capitulosVistos.filter(c => c.manga.toString() === mangaId)
-  const maxNCap = Math.max(...capitulosVistos.map(obj => obj.nCapitulo))
-  res.json(maxNCap)
+  try {
+    const usuario = await Usuario.findById(user.usuario.id)
+    const manga = usuario.seguimientoManga.find(s => s.manga.toString() === mangaId)
+    const capitulosVistos = manga.capitulosVistos.filter(c => c.manga.toString() === mangaId)
+    const maxNCap = Math.max(...capitulosVistos.map(obj => obj.nCapitulo))
+    res.json(maxNCap)
+  } catch (error) {
+
+  }
 })
 
 seguimientoRouter.post('/manga/maxVisto/:mangaId', authenticateToken, async (req, res) => {
   const { user, params } = req
   const { mangaId } = params
-  const usuario = await Usuario.findById(user.usuario.id)
-  const encontrado = usuario.maxVisto.find(m => m.manga.toString() === mangaId)
-  if (encontrado) {
-    return res.json({ error: 'Ya has visto este manga' })
+  try {
+    const usuario = await Usuario.findById(user.usuario.id)
+    const encontrado = usuario.maxVisto.find(m => m.manga.toString() === mangaId)
+    if (encontrado) {
+      return res.json({ error: 'Ya has visto este manga' })
+    }
+    usuario.maxVisto = usuario.maxVisto.concat({ manga: mangaId })
+    await usuario.save()
+    res.json(usuario.maxVisto)
+  } catch (error) {
+
   }
-  usuario.maxVisto = usuario.maxVisto.concat({ manga: mangaId })
-  await usuario.save()
-  res.json(usuario.maxVisto)
 })
 seguimientoRouter.put('/manga/maxVisto/:mangaId', authenticateToken, async (req, res) => {
   const { user, params, body } = req
@@ -87,9 +95,21 @@ seguimientoRouter.put('/manga/maxVisto/:mangaId', authenticateToken, async (req,
 seguimientoRouter.get('/manga/maxVisto/:mangaId', authenticateToken, async (req, res) => {
   const { user, params } = req
   const { mangaId } = params
-  const usuario = await Usuario.findById(user.usuario.id)
-  const encontrado = usuario.maxVisto.find(m => m.manga.toString() === mangaId)
-  res.json(encontrado.maxVisto)
+  try {
+    const usuario = await Usuario.findById(user.usuario.id)
+    const encontrado = usuario.maxVisto.find(m => m.manga.toString() === mangaId)
+    if (!encontrado) {
+      return res.json({ error: 'No has visto este manga' })
+    }
+    res.json(encontrado.maxVisto)
+  } catch (error) {
+
+  }
+})
+
+seguimientoRouter.get('/usuario', authenticateToken, async (req, res) => {
+  const { user } = req
+  res.json(user)
 })
 
 module.exports = seguimientoRouter

@@ -1,32 +1,27 @@
-const capitulosRouter = require('express').Router()
-const Capitulos = require('../models/capitulosModel')
-const Mangas = require('../models/mangasModel')
-// const middlewareLogin = require('../middleware/middlewareLogin')
-capitulosRouter.get('/', async (req, res) => {
-  const capitulos = await Capitulos.find({}).populate('mangas')
-  res.json(capitulos)
+const grupoRouter = require('express').Router()
+const Grupo = require('../models/grupoModel')
+const authenticateToken = require('../middleware/middlewareLogin')
+grupoRouter.get('/', async (req, res) => {
+  const grupos = await Grupo.find({})
+  res.json(grupos)
 })
 
-capitulosRouter.post('/', async (req, res, next) => {
+grupoRouter.post('/', authenticateToken, async (req, res, next) => {
   try {
-    const { body } = req
-    const { numero, imagenes, siguiendo, mangas } = body
-
-    const nuevoCapitulo = new Capitulos({
-      numero,
-      imagenes,
-      siguiendo,
-      mangas
+    const { body, user } = req
+    const usuarioId = user.usuario.id
+    const { nombre, tipo } = body
+    const nuevoGrupo = new Grupo({
+      nombre,
+      timestamp: new Date(),
+      miembros: { usuarios: usuarioId },
+      tipo
     })
-    const savedCapitulo = await nuevoCapitulo.save()
-    const manga = await Mangas.findById(mangas)
-    manga.capitulos = manga.capitulos.concat(savedCapitulo._id)
-    await manga.save()
-
-    res.json(savedCapitulo)
+    const savedGrupo = await nuevoGrupo.save()
+    res.json(savedGrupo)
   } catch (error) {
     next(error)
   }
 })
 
-module.exports = capitulosRouter
+module.exports = grupoRouter

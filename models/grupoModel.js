@@ -1,18 +1,23 @@
 const mongoose = require('mongoose')
 const { Schema, model } = mongoose
 
-const capitulosSchema = new Schema({
-  nombre: { type: String },
-  seguidores: { type: Number },
-  proyectos: { type: Number },
-  subidas: { type: Number },
-  timestamp: { type: Date },
-  usuario: { type: Schema.Types.ObjectId, ref: 'Usuarios' },
-  tipo: { type: String, enum: ['Uploader', 'Scanlation', 'Amateur'] }
-
+const miembroSchema = new Schema({
+  usuarios: { type: Schema.Types.ObjectId, ref: 'Usuarios' },
+  nivel: { type: Number, default: 0 }
 })
 
-capitulosSchema.set('toJSON', {
+const grupoSchema = new Schema({
+  nombre: { type: String }, // nombre del grupo
+  seguidores: { type: Number, default: 0 }, // los usuarios que se encuentran en el grupo
+  proyectos: { type: Number, default: 0 }, // los mangas subidos
+  subidas: { type: Number, default: 0 }, // los capitulos subidos
+  timestamp: { type: Date },
+  miembros: [miembroSchema], // los usuarios que se encuentran en el grupo
+  tipo: { type: String, enum: ['Uploader', 'Scanlation', 'Amateur'] },
+  mangas: [{ type: Schema.Types.ObjectId, ref: 'Mangas' }]
+})
+
+grupoSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id
     delete returnedObject._id
@@ -20,6 +25,6 @@ capitulosSchema.set('toJSON', {
   }
 })
 
-const Capitulos = model('Capitulos', capitulosSchema)
+const Grupo = model('Grupo', grupoSchema)
 
-module.exports = Capitulos
+module.exports = Grupo

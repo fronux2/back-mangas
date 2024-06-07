@@ -30,7 +30,8 @@ const usuarioSchema = new Schema({
   mangas: [{ type: Schema.Types.ObjectId, ref: 'Mangas' }],
   nivel: { type: String, enum: ['bajo', 'medio', 'alto'], default: 'bajo' },
   seguimientoManga: [seguimientoMangaSchema],
-  maxVisto: [maxVistoSchema]
+  maxVisto: [maxVistoSchema],
+  grupos: [{ type: Schema.Types.ObjectId, ref: 'Grupo' }]
 })
 
 usuarioSchema.set('toJSON', {

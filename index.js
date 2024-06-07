@@ -25,6 +25,7 @@ const estadoRouter = require('./routes/estadoRouter')
 const demografiaRouter = require('./routes/demografiaRouter')
 const registroRouter = require('./routes/registroRouter')
 const seguimientoRouter = require('./routes/seguimientoRouter')
+const grupoRouter = require('./routes/grupoRouter')
 require('./config/mongodb')
 
 const PORT = 4000
@@ -53,4 +54,5 @@ app.use('/estados', estadoRouter)
 app.use('/demografias', demografiaRouter)
 app.use('/registro', registroRouter)
 app.use('/seguimiento', seguimientoRouter)
+app.use('/grupo', grupoRouter)
 app.use(errorHandler)

@@ -3,10 +3,11 @@ const Mangas = require('../models/mangasModel')
 const authenticateToken = require('../middleware/middlewareLogin')
 const Usuario = require('../models/usuariosModel')
 const Genero = require('../models/generoModel')
+const Grupo = require('../models/grupoModel')
 const Tipo = require('../models/tipoModel')
 
 mangasRouter.get('/', async (req, res) => {
-  const mangas = await Mangas.find({}).populate('usuario').populate('capitulos').populate('genero').populate('tipo').populate('demografia')
+  const mangas = await Mangas.find({}).populate('capitulos')
   if (!mangas) return res.status(404).json({ message: 'No hay mangas' })
   res.status(200).json(mangas)
 })
@@ -14,30 +15,33 @@ mangasRouter.get('/', async (req, res) => {
 mangasRouter.post('/', authenticateToken, async (req, res, next) => {
   const { body, user } = req
   const userId = user.usuario.id
-  const { titulo, portada, genero, tipo, demografia, descripcion } = body
+  const { titulo, portada, genero, tipo, demografia, descripcion, grupo } = body
   try {
     const userEncontrado = await Usuario.findById(userId)
     const nuevoManga = new Mangas({
       titulo,
       descripcion,
       portada,
-      usuario: userId,
       genero,
       tipo,
       demografia,
-      timestamp: Date.now()
+      timestamp: Date.now(),
+      grupo
     })
+    console.log(nuevoManga)
     const mangaGuardado = await nuevoManga.save()
     res.status(200).json(mangaGuardado)
-    userEncontrado.mangas = userEncontrado.mangas.concat(mangaGuardado._id)
     const busquedaGenero = await Genero.findById(genero)
     const busquedaTipo = await Tipo.findById(tipo)
+    const busquedaGrupo = await Grupo.findById(grupo)
+    busquedaGrupo.mangas = await busquedaGrupo.mangas.concat(mangaGuardado._id)
     busquedaGenero.manga = await busquedaGenero.manga.concat(mangaGuardado._id)
     busquedaTipo.manga = await busquedaTipo.manga.concat(mangaGuardado._id)
 
     await userEncontrado.save()
     await busquedaGenero.save()
     await busquedaTipo.save()
+    await busquedaGrupo.save()
   } catch (error) {
     console.error(error)
   }
