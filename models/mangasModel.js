@@ -14,7 +14,10 @@ const mangasSchema = new Schema({
   amateur: { type: Boolean, required: true, default: false },
   Erotico: { type: Boolean, required: true, default: false },
   capitulos: [{ type: Schema.Types.ObjectId, ref: 'Capitulos' }],
-  grupo: { type: Schema.Types.ObjectId, ref: 'Grupo' }
+  estado: { type: String },
+  aprobacion: { type: String, required: true, default: 'pendiente', enum: ['pendiente', 'aprobado', 'rechazado'] },
+  calificacionGeneral: { type: Number, required: true, default: 0 },
+  grupos: [{ type: Schema.Types.ObjectId, ref: 'Grupo' }]
 })
 
 mangasSchema.set('toJSON', {

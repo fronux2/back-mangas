@@ -80,6 +80,7 @@ seguimientoRouter.post('/manga/maxVisto/:mangaId', authenticateToken, async (req
 
   }
 })
+
 seguimientoRouter.put('/manga/maxVisto/:mangaId', authenticateToken, async (req, res) => {
   const { user, params, body } = req
   const { maxVisto } = body
@@ -107,9 +108,20 @@ seguimientoRouter.get('/manga/maxVisto/:mangaId', authenticateToken, async (req,
   }
 })
 
+// usuarioOn
 seguimientoRouter.get('/usuario', authenticateToken, async (req, res) => {
+  res.send(true)
+})
+
+// grupoOn comprueba si el usuario tiene grupos
+seguimientoRouter.get('/grupo', authenticateToken, async (req, res) => {
   const { user } = req
-  res.json(user)
+  const userEncontrado = await Usuario.findById(user.usuario.id)
+  if (userEncontrado.grupos.length === 0) {
+    return res.send(false)
+  } else {
+    return res.send(true)
+  }
 })
 
 module.exports = seguimientoRouter

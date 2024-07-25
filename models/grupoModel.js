@@ -8,6 +8,7 @@ const miembroSchema = new Schema({
 
 const grupoSchema = new Schema({
   nombre: { type: String }, // nombre del grupo
+  portada: { type: String },
   seguidores: { type: Number, default: 0 }, // los usuarios que se encuentran en el grupo
   proyectos: { type: Number, default: 0 }, // los mangas subidos
   subidas: { type: Number, default: 0 }, // los capitulos subidos

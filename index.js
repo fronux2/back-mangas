@@ -28,7 +28,7 @@ const seguimientoRouter = require('./routes/seguimientoRouter')
 const grupoRouter = require('./routes/grupoRouter')
 require('./config/mongodb')
 
-const PORT = 4000
+const PORT = process.env.PORT | 4000
 
 app.get('/', (req, res) => res.status(200).send('Hola mundo como estas'))
 

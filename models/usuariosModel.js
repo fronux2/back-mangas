@@ -5,6 +5,7 @@ const seguimientoCapSchema = new Schema({
   manga: { type: Schema.Types.ObjectId, ref: 'Mangas' },
   capitulo: { type: Schema.Types.ObjectId, ref: 'Capitulos' },
   seguimiento: { type: String, required: true, default: 'Seguido', enum: ['Seguido', 'No seguido'] },
+  calificacion: { type: Number, default: 0 },
   nCapitulo: { type: Number },
   timestamp: { type: Date }
 })
@@ -12,6 +13,7 @@ const seguimientoCapSchema = new Schema({
 const seguimientoMangaSchema = new Schema({
   manga: { type: Schema.Types.ObjectId, ref: 'Mangas' },
   seguimiento: { type: String, required: true, default: 'No siguiendo', enum: ['Siguiendo', 'Pendiente', 'Abandonado', 'Completado', 'Favorito', 'No siguiendo'] },
+  calificacion: { type: Number },
   capitulosVistos: [seguimientoCapSchema],
   timestamp: { type: Date }
 })
